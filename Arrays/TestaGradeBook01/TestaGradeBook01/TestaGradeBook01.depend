@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1663598336 source:c:\users\samsung\documents\github\c_mais_mais\c_mais_mais\capitulo07\arrays\testagradebook01\testagradebook01\main.cpp
+	<iostream>
+	"../../GradeBook01.h"
+
+1663598319 c:\users\samsung\documents\github\c_mais_mais\c_mais_mais\capitulo07\arrays\gradebook01.h
+	<string>
+
+1663599262 source:c:\users\samsung\documents\github\c_mais_mais\c_mais_mais\capitulo07\arrays\testagradebook01\testagradebook01\gradebook.cpp
+	<iostream>
+	<clocale>
+	<cstdlib>
+	<iomanip>
+	"../../GradeBook01.h"
+

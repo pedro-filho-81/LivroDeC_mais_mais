@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1663855053 source:c:\users\samsung\documents\github\c_mais_mais\arrays\matrizes\gradebook\main.cpp
+	<iostream>
+	<clocale>
+	<cstdlib>
+	<iomanip>
+	"GradeBook.h"
+
+1663857302 source:c:\users\samsung\documents\github\c_mais_mais\arrays\matrizes\gradebook\gradebook.cpp
+	<iostream>
+	<cstdlib>
+	<iomanip>
+	"GradeBook.h"
+
+1663853110 c:\users\samsung\documents\github\c_mais_mais\arrays\matrizes\gradebook\gradebook.h
+	<string>
+
