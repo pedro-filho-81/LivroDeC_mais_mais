@@ -7,9 +7,9 @@
     menor dos números e o maior valor é: seguido pelo maior valor.
     3. Aumente o programa para que ele escreva na linha os números
     são iguais (somente) se forem iguais.
+    // 4. Altere o programa para que ele use doubles em vez de ints.
+    // Pedro, 20/10/2022
 */
-// 4. Altere o programa para que ele use doubles em vez de ints.
-// Pedro, 20/10/2022
 #include <vector>
 #include <iostream>
 #include <clocale>
@@ -110,16 +110,25 @@ void maiorValor(vector<double> &vetor)
 // valoresIguais
 void valoresIguais(vector<double> &vetor)
 {
+    double soma = 0.0;
+
     // loop para o primeiro vetor
     for(int i = 0; i < vetor.size(); i++)
     { // loop para o segundo vetor
         for( int j = i + 1; j < vetor.size(); j++)
         {
             // verifica se o vetor[ i ] é igual  ao vetor[ j ]
-            if(vetor[ i ] == vetor[ j ]) // se verdade
-                // imprima os números iguais
-                cout << "Primeiro valor " << vetor[ i ] << " na posição " << i + 1
-                        << "\nSegundo valor " << vetor[ j ] << " na posição " << j + 1 << endl;
+            if(vetor[ i ] == vetor[ j ] ) // se verdade
+            {
+                cout << "vetor " << vetor[ i ] << " posição " << j + 1 << endl;
+                soma++;
+            } // final if
+
         } // final for j
     } // final for i
+
+    if( soma > 0)
+        cout << "Vetor valores possui " << soma << " valor(es) igual(is)." << endl;
+    else
+        cout << "Vetor não possui valores iguais." << endl;
 } // final valoresIguais
