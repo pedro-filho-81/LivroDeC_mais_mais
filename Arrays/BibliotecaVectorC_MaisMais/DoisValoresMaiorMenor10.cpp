@@ -32,7 +32,7 @@ using namespace std;
 void entradaDeDados(vector<double> & ); // adiciona valores ao vetor via teclado
 void exibirValores( const vector<double> & ); // exibe os valores do vetor
 double menorValor( vector<double> & ); // encontra o menor valor do vetor
-void maiorValor( vector<double> & ); // encontra o maior valor do vetor
+double maiorValor( vector<double> & ); // encontra o maior valor do vetor
 void valoresIguais( vector<double> & ); // compara se existe 2 valores iguais no vetor
 
 int main()
@@ -66,6 +66,10 @@ void entradaDeDados(vector<double> &vetor)
     double numero = 0;
 
     cout << "Digite números reais: ";
+    cin >> numero;
+    vetor.push_back( numero );
+    double maiorVl1 = maiorValor( vetor );
+    double menorVl1 = menorValor( vetor );
 
     // enquanto número igual a um valor faça
     while( cin >> numero )
@@ -75,7 +79,18 @@ void entradaDeDados(vector<double> &vetor)
 
         // VERIFICA SE O VALOR DIGITADO É O maior OU O menor
         // valor QUE EXISTE NO VETOR ATÉ O PRESENTE momento
-        maiorValor( vetor );
+        double maiorVl2 = maiorValor( vetor );
+        double menorVl2 = menorValor( vetor );
+
+        if(maiorVl1 > maiorVl2)
+            cout << "O maior valor até agora é " << maiorVl1 << endl;
+        else
+            cout << "O maior valor até agora é " << maiorVl2 << endl;
+
+        if(menorVl1 < menorVl2)
+            cout << "O menor valor até agora é " << menorVl1 << endl;
+        else
+            cout << "O menor valor até agora é " << menorVl2 << endl;
 
     } // final while
 
@@ -95,7 +110,7 @@ void exibirValores( const vector<double> &vetor)
 } // final exibirValores
 
 // menorValor
-void menorValor(vector<double> & vetor)
+double menorValor(vector<double> & vetor)
 {
     // variável menor recebe o valor do vetor zero
     double menor = vetor[ 0 ];
@@ -107,21 +122,21 @@ void menorValor(vector<double> & vetor)
             menor = valor;
 
     // após exibe o menor valor
-    cout << "O menor valor até agora é " << menor << endl;
-    // return menor;
+    // cout << "O menor valor até agora é " << menor << endl;
+    return menor;
 
 } // final menorValor
 
 // maiorValor
-void maiorValor(vector<double> &vetor)
+double maiorValor(vector<double> &vetor)
 {
     double maior = vetor[ 0 ];
     for(double valor: vetor)
         if(valor > maior)
             maior = valor;
 
-    cout << "O maior valor até agora é " << maior << endl;
-//    return maior;
+    // cout << "O maior valor até agora é " << maior << endl;
+    return maior;
 
 }  // final maior valor
 
