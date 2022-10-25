@@ -23,6 +23,14 @@
         Faça com que seu programa escreva “Ouvi dizer que você acabou de fazer aniversário
         e tem anos de idade”. Se a idade for 0 ou menos ou 110 ou mais, chame simple_error
         ("você está brincando!") usando simple_error() de std_lib_facilities.h.
+    6. Adicione isto à sua carta: Se seu amigo tem menos de 12 anos, escreva
+        “No próximo ano você terá +1”. Se seu amigo tem 17 anos, escreva
+        “No próximo ano você poderá votar”. Se o seu amigo tiver mais de 70 anos,
+        escreva “Espero que você esteja gostando da aposentadoria”.
+        Verifique seu programa para certificar-se de que ele responde adequadamente a cada
+        0tipo de valor.
+    7. Acrescente “Atenciosamente”, seguido de duas linhas em branco para assinatura,
+        seguidas de seu nome.
         Pedro,25/10/2022
 */
 #include <iostream>
@@ -66,13 +74,14 @@ int main()
     // ler o caractere em sexo do amigo
     cin >> friend_sex; // read character into friend_sex
 
-    // ouvi dizer que você fez aniversário e você tem anos de idade
-    cout << "I hear you just had a birthday and you are age years old.";
+    // qual a sua idade?
+    cout << "How old are you? ";
     // idade é uma variável do tipo inteiro
     int age; // age is a variabel of type int
     // lê um caractere em idade
     cin >> age; // read character into age
-
+    if(age <= 0 || age >= 110)
+        cout << "Você está de brincadeira." << endl;
 
     // CARTA
     // Olá frist_name
@@ -98,6 +107,32 @@ int main()
     else if( friend_sex == 'f')
         // exiba: se você ver a amiga por favor pessa para ela ligar para mim.
         cout << "if you see " << friend_name << " please ask her to call me." << endl;
+
+    // se a idade for maior que zero e menor que 110
+    if(age > 0 && age < 110)
+        // ouvi dizer que você fez aniversário e você tem anos de idade
+        cout << "I hear you just had a birthday and you are " << age << " years old.";
+
+    if(age < 12)
+    {
+        cout << "\nNo próximo ano você terá a idade " << age + 1 << endl;
+        cout << "Next year you will be age " << age +1 << endl;
+    }
+    else if( age == 15)
+    {
+        cout << "\nNo próximo ano você poderá votar." << endl;
+        cout << "Next year you will be able to vote." << endl;
+    }
+    else if( age >= 70)
+    {
+        cout << "\nEspero que você estaja gostando da apsentadoria." << endl;
+        cout << "I hope you are enjoying retirement." << endl;
+    }
+
+    cout << "\n\nAtenciosaente" << endl;
+    cout << endl;
+    cout << "___________________________________" << endl;
+    cout << "\tPedro S. Filho" << endl;
 
     cout << endl; // new line
 
