@@ -19,14 +19,22 @@
     // Se for o menor até agora, escreva o menor até agora após o número.
      // Se for o maior até agora, escreva o maior até agora após o número.
     // Pedro, 23/10/2022
+    // 7. Adicione uma unidade a cada entrada dupla; ou seja, insira valores
+    // como 10 cm, 2,5 pol, 5 pés ou 3,33 m. Aceite as quatro unidades: cm, m, pol, ft.
+    // Considere os fatores de conversão 1m == 100cm, 1in == 2,54cm, 1ft == 12in.
+    // Leia o indicador de unidade em uma string.
+    // Você pode considerar 12 m (com espaço entre o número e a unidade)
+    // equivalente a 12 m (sem espaço).
+    // Pedro, 31/10/2022
+    // 8. Rejeite valores sem unidades ou com representações “ilegais” de unidades,
+    // como y, jarda, metro, km e galões.
 */
-// 7. Adicione uma unidade a cada entrada dupla; ou seja, insira valores
-// como 10 cm, 2,5 pol, 5 pés ou 3,33 m. Aceite as quatro unidades: cm, m, pol, ft.
-// Considere os fatores de conversão 1m == 100cm, 1in == 2,54cm, 1ft == 12in.
-// Leia o indicador de unidade em uma string.
-// Você pode considerar 12 m (com espaço entre o número e a unidade)
-// equivalente a 12 m (sem espaço).
-// Pedro, 31/10/2022
+// 9. Acompanhe a soma dos valores inseridos (assim como o menor e o maior)
+// e o número de valores inseridos. Quando o loop terminar, imprima o menor,
+// o maior, o número de valores e a soma dos valores.
+// Observe que, para manter a soma, você deve decidir qual unidade usar para essa soma;
+// usar medidores.
+
 #include <vector>
 #include <iostream>
 #include <clocale>
@@ -40,9 +48,10 @@ void entradaDeDados(vector<double> & ); // adiciona valores ao vetor via teclado
 void exibirValores( const vector<double> & ); // exibe os valores do vetor
 double menorValor( vector<double> & ); // encontra o menor valor do vetor
 double maiorValor( vector<double> & ); // encontra o maior valor do vetor
+void somaValores( vector<double> & ); // soma os valores do vetor
 void valoresIguais( vector<double> & ); // com para se existe 2 valores iguais no vetor
 void converteValores( double valor, string tipo ); // converte valores para m, cm, pol, pés
-void entradaDeValores(); // entra com o valor e o tipo
+void entradaDeValores(vector<double> & ); // entra com o valor e o tipo
 
 int main()
 {
@@ -52,14 +61,19 @@ int main()
     // cria um vetor
     vector<double> valores;
 
+    // variáveis
+    double maiorVl = 0.0;
+    double menorVl = 0.0;
+
     // RECEBE Um VALOR E VERIFICA SE O NÚmERO DIGITADO
     // É O maior OU o menor VALOR DIGITADO ATÉ O PRESENTE mOmENTO
     // entradaDeDados(valores);
-    entradaDeValores();
-
-    // exibirValores( valores );
-
-    // valoresIguais( valores );
+    entradaDeValores( valores );
+    exibirValores(valores );
+    cout << "Maior valor = " << maiorValor( valores ) << endl;
+    cout << "Menor valor = " << menorValor( valores ) << endl;
+    somaValores( valores );
+    valoresIguais( valores );
 
     cout << endl; // nova linha
 
@@ -114,7 +128,7 @@ void exibirValores( const vector<double> &vetor)
     // loop para mostra os elementos do vetor
     for( double valor : vetor)
         // exibir valores
-        cout << setw(8) << valor;
+        cout << setw(5) << valor;
 
     cout << "   };" << endl;
 } // final exibirValores
@@ -227,22 +241,23 @@ void converteValores(double valor, string tipo)
      } // final
 
     // exibir resultado
-    cout << "\nCONVERSÃO DE VALORES:" << endl;
-    cout << valor << tipo << " equivale a:" << endl;
-    cout << "metros = " << m << "m"
-            << "\nCentimetros = " << cm << "cm"
-            << "\nmilimetros = " << mm << "mm"
-            << "\nPolegadas = " << pol << "pol"
-            << "\nPes = " << pes << "pe" << endl;
+    cout << "\n\tCONVERSÃO DE VALORES:" << endl;
+    cout << "\t" << valor << tipo << " equivale a:" << endl;
+    cout << "\tmetros = " << m << "m"
+            << "\n\tCentimetros = " << cm << "cm"
+            << "\n\tmilimetros = " << mm << "mm"
+            << "\n\tPolegadas = " << pol << "pol"
+            << "\n\tPes = " << pes << "pe" << endl;
 
 } // final converteValores
 
 // entradaDeValores
-void entradaDeValores()
+void entradaDeValores(vector<double> &vetor)
 {
     // variáveis
     string tipo = " ";
     double valor =0.0;
+    int contador = 0;
 
     // entrada de dados
     cout << "Informe o valor para a conversão: ";
@@ -252,11 +267,34 @@ void entradaDeValores()
         cout << "Informe o tipo a ser convertido \nExp.:(m, cm, mm, pol ou pé): ";
         cin >> tipo;
 
-        converteValores(valor, tipo);
+        if(tipo == "m" || tipo == "cm" || tipo == "mm" || tipo == "pol" || tipo == "pe")
+        {
+            converteValores(valor, tipo);
+            vetor.push_back(valor);
+            contador++;
+
+        } // final if
+        else
+            cout << "TIPO INVALIDO." << endl;
 
         // entrada de dados
         cout << "\nInforme o valor para a conversão: ";
 
     } // final while
 
+    cout << "Foram cadastrados " << contador << " valores.";
+
 } // final entradaDeValores
+
+// somaValores
+void somaValores(vector<double> &vetor)
+{
+    // variável
+    double total = 0.0;
+
+    for( int i = 0; i < vetor.size(); i++ )
+        total += vetor[ i ];
+
+    cout << "Soma = " << total << endl;
+
+} // final somaValores
