@@ -28,13 +28,16 @@
     // Pedro, 31/10/2022
     // 8. Rejeite valores sem unidades ou com representações “ilegais” de unidades,
     // como y, jarda, metro, km e galões.
+    // 9. Acompanhe a soma dos valores inseridos (assim como o menor e o maior)
+    // e o número de valores inseridos. Quando o loop terminar, imprima o menor,
+    // o maior, o número de valores e a soma dos valores.
+    // Observe que, para manter a soma, você deve decidir qual unidade usar para essa soma;
+    // usar medidores.
+    10. Mantenha todos os valores inseridos (convertidos em metros) em um vetor.
+        No final, escreva esses valores.
+    11. Antes de escrever os valores do vetor, ordene-os (isso os fará sair em ordem crescente).
 */
-// 9. Acompanhe a soma dos valores inseridos (assim como o menor e o maior)
-// e o número de valores inseridos. Quando o loop terminar, imprima o menor,
-// o maior, o número de valores e a soma dos valores.
-// Observe que, para manter a soma, você deve decidir qual unidade usar para essa soma;
-// usar medidores.
-
+#include <algorithm>
 #include <vector>
 #include <iostream>
 #include <clocale>
@@ -50,7 +53,7 @@ double menorValor( vector<double> & ); // encontra o menor valor do vetor
 double maiorValor( vector<double> & ); // encontra o maior valor do vetor
 void somaValores( vector<double> & ); // soma os valores do vetor
 void valoresIguais( vector<double> & ); // com para se existe 2 valores iguais no vetor
-void converteValores( double valor, string tipo ); // converte valores para m, cm, pol, pés
+void converteValores( vector<double> &, double valor, string tipo ); // converte valores para m, cm, pol, pés
 void entradaDeValores(vector<double> & ); // entra com o valor e o tipo
 
 int main()
@@ -69,9 +72,12 @@ int main()
     // É O maior OU o menor VALOR DIGITADO ATÉ O PRESENTE mOmENTO
     // entradaDeDados(valores);
     entradaDeValores( valores );
+
+    sort(valores.begin(), valores.end() ); // organiza vetor
+    cout << "\n\tRESUMO";
     exibirValores(valores );
-    cout << "Maior valor = " << maiorValor( valores ) << endl;
-    cout << "Menor valor = " << menorValor( valores ) << endl;
+    cout << "\tMaior valor = " << maiorValor( valores ) << endl;
+    cout << "\tMenor valor = " << menorValor( valores ) << endl;
     somaValores( valores );
     valoresIguais( valores );
 
@@ -123,12 +129,12 @@ void entradaDeDados(vector<double> &vetor)
 // exibirValores
 void exibirValores( const vector<double> &vetor)
 {
-    cout << "\nvalores = {";
+    cout << "\n\tvalores em metros = \n{";
 
     // loop para mostra os elementos do vetor
     for( double valor : vetor)
         // exibir valores
-        cout << setw(5) << valor;
+        cout << setw(8) << valor;
 
     cout << "   };" << endl;
 } // final exibirValores
@@ -177,7 +183,7 @@ void valoresIguais(vector<double> &vetor)
             // verifica se o vetor[ i ] é igual  ao vetor[ j ]
             if(vetor[ i ] == vetor[ j ] ) // se verdade
             {
-                cout << "vetor " << vetor[ i ] << " posição " << j + 1 << endl;
+                cout << "\tvetor " << vetor[ i ] << " posição " << j + 1 << endl;
                 soma++;
             } // final if
 
@@ -185,59 +191,64 @@ void valoresIguais(vector<double> &vetor)
     } // final for i
 
     if( soma > 0)
-        cout << "Vetor valores possui " << soma << " valor(es) igual(is)." << endl;
+        cout << "\tVetor valores possui " << soma << " valor(es) igual(is)." << endl;
     else
-        cout << "Vetor não possui valores iguais." << endl;
+        cout << "\tVetor não possui valores iguais." << endl;
 } // final valoresIguais
 
 // converteValores
-void converteValores(double valor, string tipo)
+void converteValores( vector<double> &vetor, double valor, string tipo)
 {
     // variáveis
     double m = 0.0;
     double cm = 0.0;
     double mm = 0.0;
     double pol = 0.0;
-    double pes = 0;
+    double pe = 0.0;
 
     if( tipo == "m")
     {
+        vetor.push_back( valor );
             cm = valor * 100;
             mm = valor * 1000;
             pol = valor * 39.37;
-            pes = valor * 3.28084;
+            pe = valor * 3.28084;
     } // final
     else if ( tipo == "cm")
     {
             m = valor * 0.01;
+            vetor.push_back(m);
             mm = valor * 10;
             pol = valor * 0.393701;
-            pes = valor * 0.0328084;
+            pe = valor * 0.0328084;
      } // final
      else if(tipo == "mm")
     {
             m = valor * 0.001;
+            vetor.push_back(m);
             cm = valor * 0.1;
             pol = valor * 0.0393701;
-            pes = valor * 0.00328084;
+            pe = valor * 0.00328084;
      } // final
     else if( tipo == "pol")
     {
             m = valor * 0.0254;
+            vetor.push_back(m);
             cm = valor * 2.54;
             mm = valor * 25.4;
-            pes = valor * 0.0833333;
+            pe = valor * 0.0833333;
      } // final
-     else if( tipo == "pes")
+     else if( tipo == "pe")
     {
             m = valor * 0.3048;
+            vetor.push_back(m);
             cm = valor * 30.48;
             mm = valor * 304.8;
             pol = valor * 12;
     } // final
     else
     {
-            cout << "Tipo indevido. Informe o tipo (m, cm, mm, pol ou pes)." << endl;
+            cout << "\tTipo indevido. Informe o tipo (m, cm, mm, pol ou pes)." << endl;
      } // final
 
     // exibir resultado
@@ -247,7 +258,7 @@ void converteValores(double valor, string tipo)
             << "\n\tCentimetros = " << cm << "cm"
             << "\n\tmilimetros = " << mm << "mm"
             << "\n\tPolegadas = " << pol << "pol"
-            << "\n\tPes = " << pes << "pe" << endl;
+            << "\n\tPes = " << pe << "pe" << endl;
 
 } // final converteValores
 
@@ -269,8 +280,7 @@ void entradaDeValores(vector<double> &vetor)
 
         if(tipo == "m" || tipo == "cm" || tipo == "mm" || tipo == "pol" || tipo == "pe")
         {
-            converteValores(valor, tipo);
-            vetor.push_back(valor);
+            converteValores(vetor, valor, tipo);
             contador++;
 
         } // final if
@@ -295,6 +305,6 @@ void somaValores(vector<double> &vetor)
     for( int i = 0; i < vetor.size(); i++ )
         total += vetor[ i ];
 
-    cout << "Soma = " << total << endl;
+    cout << "\tSoma = " << total << endl;
 
 } // final somaValores
