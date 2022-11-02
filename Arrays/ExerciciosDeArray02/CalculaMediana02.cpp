@@ -25,7 +25,7 @@ int main()
     setlocale(LC_ALL, "Portuguese");
 
     // vetor
-    vector<double> vetor = {34, 39, 36, 35, 37, 40, 36, 38, 36, 38, 41};
+    vector<double> vetor = {34, 39, 36, 35, 37, 40, 36, 38, 36, 38, 41, 25};
 
     cout << endl; // nova linha
 
@@ -37,8 +37,8 @@ int main()
     sort(vetor.begin(), vetor.end() ); // organiza o vetor
     imprimir( vetor ); // exibe vetor organizado
 
-    calculaMediana( vetor );
-    calculaMedia( vetor );
+    calculaMediana( vetor ); // calcula a mediana
+    calculaMedia( vetor ); // calcula a média
 
     system("pause"); // pausa do programa
 
@@ -50,17 +50,17 @@ int main()
  void imprimir( const vector<double> &vetor)
 {
         cout << "Vetor = {";
-        for(int valor : vetor)
+        for(int valor : vetor) // loop pelo vetor
         {
-            cout << setw(5) << valor;
+            cout << setw(5) << valor; // exibo os valores do vetor
         }
-        cout << " };" << endl;
+        cout << " };" << endl; // pula linha
 } // final exibirValores
 
 // calculaMediana
 void calculaMediana(vector<double> &vetor )
 {
-    double mediana = 0;
+    double mediana = 0; // variável
 
     // se o tamanho do vetor for par
     if(vetor.size() % 2 == 0)
