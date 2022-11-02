@@ -27,7 +27,7 @@ int main()
     // muda a configuração para português brasileiro
     setlocale(LC_ALL, "Portuguese");
 
-    // vetor
+    // vetor com "distâncias entre cidades"
     vector<double> vetor = {34.25, 39.35, 36.78, 35.12, 37.41, 40.47, 36.6, 38.07, 36, 38, 41, 25};
 
     cout << endl; // nova linha
