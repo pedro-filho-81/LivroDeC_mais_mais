@@ -28,6 +28,7 @@ int main()
 
     int sorteio = 0;
     int palpite = 0;
+    int contaJogadas = 0;
     char sentinela = 's';
 
     // vetor
@@ -36,7 +37,7 @@ int main()
     while(sentinela != 'n' || sentinela != 'N')
     {
         // gerador
-        srand( time( 0 ) );
+        srand( time( NULL ) );
 
         // sorteio recebe valor aleatório
         sorteio = adicionarNumero();
@@ -56,19 +57,36 @@ int main()
             if( sorteio == palpite)
             {
                 // imprima
-                cout << "Você venceu!" << endl;
+                cout << "\nExcelente! Você adivinhou o número." << endl;
+                contaJogadas++;
+
+                if(contaJogadas <= 10)
+                {
+                    cout << "Você sabe o segredo ou teve sorte!" << endl;
+                } // final if contar
+                else if( contaJogadas >= 11)
+                {
+                    cout << "Você deveria ser capaz de fazer melhor!" << endl;
+                } // final else if
+
                 break; // e saia do jogo
             } // final if
             else if(sorteio > palpite)
             {
-                cout << "Digite um número maior." << endl;
+                cout << "Muito baixo. Tente um número maior." << endl;
+                contaJogadas++;
             }
             else if(sorteio < palpite)
             {
-                cout << "Digite um número menor." << endl;
+                cout << "Muito alto. Tente um número menor." << endl;
+                contaJogadas++;
             }
 
         } // final while interno
+
+        // resultado
+        cout << "Você jogou " << contaJogadas << " vezes\n" << endl;
+        contaJogadas = 0;
 
         cout << "Deseja continuar jogando( s ou n )? ";
         cin >> sentinela;
@@ -90,6 +108,7 @@ int main()
 // adicionarNumero
 int adicionarNumero()
 {
-    return 1 + rand() % 1000;
+    srand( time(  NULL ) );
+    return rand() % 1000;
 
 } // final adicionarNumero
