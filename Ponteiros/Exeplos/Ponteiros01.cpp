@@ -1,5 +1,5 @@
 /*
-    Utilizando os operadores * e &
+    Utilizando os operadores * e & de ponteiro
 */
 #include <iostream>
 #include <clocale>
