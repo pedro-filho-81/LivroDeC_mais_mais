@@ -12,6 +12,7 @@ using namespace std;
 
 // protótipos
 void imprimeCaracteres( const char * );
+void converteParaMaiuscula(char * );
 
 int main()
 {
@@ -19,10 +20,13 @@ int main()
     setlocale(LC_ALL, "Portuguese");
 
     // cria vetor
-    const char frase[] = "Imprimindo caracteres usando pinteiro para dados constantes.";
+    char frase[] = "Imprimindo caracteres usando pinteiro para dados constantes.";
 
     cout << "A frase é: " << endl;
     imprimeCaracteres( frase );
+
+    converteParaMaiuscula( frase );
+    cout << "\nFrase Maiúscula:\n" << frase << endl;
 
     cout << endl; // nova linha
 
@@ -40,3 +44,13 @@ void imprimeCaracteres( const char *frasePtr )
         // imprima
         cout << *frasePtr;
 } // final imprimeCaracteres
+
+// void converteParaMaiuscula(char * );
+void converteParaMaiuscula(char *frasePtr )
+{
+    for(; *frasePtr != '\0'; frasePtr++)
+    {
+        if(islower(*frasePtr))
+            *frasePtr = toupper(*frasePtr);
+    } // final for
+} // final converte
