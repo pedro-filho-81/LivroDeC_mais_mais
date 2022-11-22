@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1669148239 source:c:\users\samsung\documents\github\c_mais_mais\c_mais_mais\ponteiros\cartasdobaralho01\main.cpp
+	<iostream>
+	<clocale>
+	<cstdlib>
+	<iomanip>
+	<ctime>
+	"DeckOfCards.h"
+
+1669147565 c:\users\samsung\documents\github\c_mais_mais\c_mais_mais\ponteiros\cartasdobaralho01\deckofcards.h
+
+1669152000 source:c:\users\samsung\documents\github\c_mais_mais\c_mais_mais\ponteiros\cartasdobaralho01\deckofcards.cpp
+	<iostream>
+	<clocale>
+	<cstdlib>
+	<iomanip>
+	<ctime>
+	"DeckOfCards.h"
+
