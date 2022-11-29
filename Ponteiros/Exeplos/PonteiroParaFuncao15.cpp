@@ -31,8 +31,10 @@ int main()
     cin >> order;
     cout << "Vetor original:" << endl;
 
+    // loop para imprimir o vetor original
     for( counter = 0; counter < arraySize; counter++)
     {
+        // imprime o vetor original
         cout << setw(4) << vetor[counter];
     } // final for
 
@@ -50,8 +52,10 @@ int main()
         cout << "\nElementos do vetor em ordem decrescente:" << endl;
     } // final else
 
+    // loop para imprimir o vetor em ordem
     for(counter = 0; counter < arraySize; counter++)
-        cout << setw(4) << vetor[ counter ];
+        // imprime o vetor em ordem crescente ou decrescente
+        cout << setw(4) << vetor[ counter ]; //
 
     cout << endl; // nova linha
 
