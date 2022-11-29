@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <ctime>
-#include "DeckOfCards.h"
+#include "DeckOfCards.h"// igual a protótipo de função
 
 using namespace std;
 
