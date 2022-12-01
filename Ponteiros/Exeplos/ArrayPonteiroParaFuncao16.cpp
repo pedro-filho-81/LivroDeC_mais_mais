@@ -5,6 +5,7 @@
 #include <clocale>
 #include <cstdlib>
 #include <iomanip>
+#include <cctype>
 
 using namespace std;
 
@@ -18,6 +19,7 @@ int main()
     // muda a configuração para português brasileiro
     setlocale(LC_ALL, "Portuguese");
 
+    // cria o ponteiro *f[ 3 ] para vetor do tipo void
     // inicializa um array de três ponteiros para função que
     // aceitam um argumento inteiro e retorna um void
     void (*f[ 3 ]) ( int ) = {funcao0, funcao1, funcao2};

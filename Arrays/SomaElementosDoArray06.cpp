@@ -1,5 +1,5 @@
 /*
-    soando os eleentos do array
+    soando os elementos do array
 */
 #include <iostream>
 #include <clocale>

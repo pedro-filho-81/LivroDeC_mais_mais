@@ -12,7 +12,7 @@ int main()
 {
     setlocale(LC_ALL, "Portuguese");
 
-    int ARRAY_SIZE = 11;
+    const int ARRAY_SIZE = 11;
 
     int valores[ARRAY_SIZE] = {0, 0, 0, 3, 2, 3, 1, 2, 4, 2, 1 };
 

@@ -34,9 +34,9 @@ int main()
 
     // se a resposta for diferente de -1
     if(resposta != -1)
-        cout << "Valor encontrado na posição: " << resposta + 1 << endl;
+        cout << "\nValor encontrado na posição: " << resposta + 1 << endl;
     else
-        cout << "Valor não encontrado" << endl;
+        cout << "\nValor não encontrado" << endl;
 
     system("pause"); // pausa do programa
 
