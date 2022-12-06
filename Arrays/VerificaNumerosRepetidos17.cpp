@@ -65,7 +65,7 @@ void adicionar(int vetor[], int tamanho  )
     for( int indice = 0; indice < tamanho; indice++)
     {
         // variável alea recebe valor aleatório entre 1 e 30
-        alea = 1 + rand() % 30;
+        alea = 1 + rand() % 20;
 
         // a variável resposta recebe um valor da função pesquisaLinear
         // achei melhor para ser usada dentre dessa função
@@ -75,7 +75,7 @@ void adicionar(int vetor[], int tamanho  )
         // resposta = pesquisaBinaria(vetor, alea, 0, tamanho);
 
         // mostra como está sendo adicionado os valores no vetor
-        cout << setw(3) << alea << setw(23) << " adicionado na posição "
+        cout << setw(3) << alea << setw(28) << " adicionado na posição "
                 << setw(3) << indice << endl;
 
         // este enquanto é utilizado quando a variável resposta recebe um valor
@@ -83,7 +83,7 @@ void adicionar(int vetor[], int tamanho  )
         while(resposta != -1)
         {
             // variável alea usado para receber outro recebe valor aleatório
-            alea = 1 + rand() % 30;
+            alea = 1 + rand() % 20;
 
             // a variável resposta recebe um valor da função pesquisa
             // a função retorna o valor pesquisado ou -1
@@ -93,7 +93,7 @@ void adicionar(int vetor[], int tamanho  )
 
             // mostra o valor trocado por outro, subistituindo o valor duplicado
             // ou seja, um valor que já tem no vetor
-            cout << setw(3) << alea << setw(23) << " trocado na posição "
+            cout << setw(3) << alea << setw(28) << " substitui duplicado posição"
                     << setw(3) << indice << endl;
 
             // contador dos valores trocados
@@ -110,7 +110,7 @@ void adicionar(int vetor[], int tamanho  )
     } // final for
 
     // mostra quantidade dos valores trocados
-    cout << "\nNo vetor fora substituidos " << contaTrocados << " elementos.\n" << endl;
+    cout << "\nNo vetor foram substituidos " << contaTrocados << " elementos.\n" << endl;
 
 } // final adicionar
 
