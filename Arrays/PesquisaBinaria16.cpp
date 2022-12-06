@@ -179,8 +179,8 @@ void exibeLinha(int vetor[], int inicio, int meio, int fim )
     {
         if( i < inicio || i > fim )
             cout << " ";
-        else if ( i < meio )
-            cout << setw(3) << vetor[ i ];
+        else if ( i == meio )
+            cout << setw(3) << vetor[ i ] << "*";
         else
             cout << setw(3) << vetor[ i ];
 
