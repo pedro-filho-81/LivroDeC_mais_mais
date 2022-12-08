@@ -44,7 +44,7 @@ string GradeBook::getCourseName()
 void GradeBook::displaymessage()
 {
     // exibe a mendagem de boas-vindas
-    cout << "Bem vindo ao curso:\n" << getCourseName() << "!" << endl;
+    cout << "Bem vindo ao curso:\n " << getCourseName() << "!" << endl;
 } // final displaymessage
 
 // realiza varias operações de dados
