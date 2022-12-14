@@ -19,6 +19,7 @@ int main()
     const int arraySize = 10; // índice do vetor
     // vetor
     int vetor[arraySize] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
     // variável que recebe os valor retornado
     int result = whatIsThis(vetor, arraySize);
 
