@@ -29,14 +29,23 @@
 #include <iostream>
 #include <clocale>
 #include <cstdlib>
+#include <string>
 #include <iomanip>
 
 using namespace std;
 
 // protótipos
-void exibir(int [][20], int ); // exibir atriz
-void executaMovimento(int [][20], int [], int, int );
+void abertura(string [][20], int, int[], int );
+void adicionar(string [][20], int);
+void desenhar(string [][20], int, int [], int, int, int );
+void exibir(string [][20], int ); // exibir matriz
+void exibirMovimento(int [], int );
 void menu(); // opções
+int moverParaCima(string [][20], int, int, int, int);
+int moverParaBaixo(string[][20], int, int, int, int );
+int moverParaDireita(string [][20], int, int, int, int );
+int moverParaEsquerda(string [][20], int, int, int, int );
+void processsar(string [][20], int, int[], int, int, int, int );
 
 int main()
 {
@@ -48,26 +57,12 @@ int main()
     const int sizeT = 30;
 
     // arrys
-    int tabuleiro[ arraySize ][ arraySize ] = {0};
+    string tabuleiro[ arraySize ][ arraySize ] = {"0"};
     int movimentos[sizeT];
 
-    // variáveis
-    int linha = 0, coluna = 0;
-
-    exibir(tabuleiro, arraySize );
-    // entrada de dados
-    cout << "\nEm um tela 20x20 desenhe alguma coisa:" << endl;
-    cout << "Informe a posição inicial:"
-            << "\nLinha entre 0 e 19 inclusive: ";
-    cin >> linha;
-    cout << "Coluna entre 0 e 19 inclusive: ";
-    cin >> coluna;
-
-    system("cls");
-
-    menu();
-
-    // entrada de dados;
+    // chama as finções
+    adicionar(tabuleiro, arraySize); // desenhar o tabuleiro
+    abertura(tabuleiro, arraySize,movimentos, sizeT ); // perguntar em que posição quer começar
 
     cout << endl; // nova linha
 
@@ -76,6 +71,32 @@ int main()
     return 0;
 
 } // final principal
+
+// abertura
+void abertura(string matriz[][20], int arraySize, int mover[], int sizeT)
+{
+    int posicao;
+    int linha = 0, coluna = 0;
+
+    // entrada de dados da posição inicial
+    cout << "\tIniciando desenho.\nVocê está no início do tabuleiro posição [0][0]"
+            << "\nEm um tela 20x20 deseja iniciar em outra posição:\n[1 = sim / -1 = não]? ";
+    cin >> posicao; // entrada do usuário
+
+    if(posicao == 1)
+    {
+        cout << "Informe a posição inicial da linha e da coluna:"
+                << "\ncom valores entre 0 e 19 inclusive: ";
+        cin >> linha;
+        cin >> coluna;
+        matriz[ linha ][ coluna ] = " ";
+    } // final if
+    else
+        matriz[ linha ][ coluna ] = " ";
+
+    desenhar(matriz, arraySize, mover, sizeT, linha, coluna );
+
+} // final abertura
 
 // menu
 void menu()
@@ -92,10 +113,27 @@ void menu()
             << "\n\t**********************************" << endl;
 } // final menu
 
-// exibir
-void exibir(int arrayTela[][ 20 ], int arraySize )
+// adicionar
+void adicionar( string tabuleiro[][20], int arraySize )
 {
-    cout << setw(25) << "Tela Principal" << endl;
+    // cria o tabuleiro
+    // loop para alinha
+    for( int i = 0; i < arraySize; i++)
+    {
+        // loop para a coluna
+        for( int j = 0; j < arraySize; j++ )
+        {
+            // adiciona zeros
+            tabuleiro[ i ][ j ] = "0" ;
+        } // final  for j
+    } // final for i
+
+} // final adicionar
+
+// exibir
+void exibir(string arrayTela[][ 20 ], int arraySize )
+{
+    cout << setw(40) << "Tela Principal\n" << endl;
 
     for(int i = 0; i < arraySize; i++)
     {
@@ -103,8 +141,120 @@ void exibir(int arrayTela[][ 20 ], int arraySize )
 
         for( int j = 0; j < arraySize; j++)
         {
-            cout << setw(2)<< arrayTela[ i ][ j ];
+            cout << setw(2) << arrayTela[ i ][ j ];
         } // final for j
         cout << endl; // nova linha
     } // final for i
 } // final exibir
+
+// desenhar
+void desenhar(string matriz[][20], int arraySize, int mover[], int sizeT, int linha, int coluna )
+{
+    // variáveis
+    int opcao = 0;
+    int contar = 0;
+    int movimento;
+
+    menu(); // chama função menu
+
+    cout << "\tDigite as suas opções: ";
+
+    // enquanto a opção for diferente de 9 faça
+    while(opcao != 9)
+    {
+        cin >> opcao;
+
+        if( opcao == 9 )
+            break;
+        else if( opcao == 6 )
+        {
+            mover[contar] = opcao;
+        }
+        mover[contar] = opcao;
+
+        cout << "5,";
+        cin >> movimento;
+
+        if(opcao == 1)
+        {
+            linha = moverParaCima(matriz, arraySize, movimento, linha, coluna);
+        }
+        else if(opcao == 2)
+        {
+            linha = moverParaBaixo(matriz, arraySize, movimento, linha, coluna );
+        }
+        else if(opcao == 3)
+        {
+            coluna = moverParaDireita(matriz, arraySize, movimento, linha, coluna );
+        }
+        else if(opcao == 4)
+        {
+            coluna = moverParaEsquerda(matriz, arraySize, movimento, linha, coluna );
+        }
+
+        contar++;
+    } // final while
+
+    exibir(matriz, arraySize );
+
+} // final desenhar
+
+// exibirMovimento
+void exibirMovimento(int mover[], int sizeT)
+{
+    // loop for para exibir vetor
+    for(int i = 0; i < sizeT; i++)
+        cout << setw(2) << mover[ i ];
+    cout << endl;
+} // final exibirMovimento
+
+// moverParaCima
+int moverParaCima(string matriz[][20], int arraySize, int mover, int linha, int coluna)
+{
+    int linha1;
+    for(linha1 = 0; linha1 < mover; linha1++)
+    {
+        matriz[ linha - linha1 ][ coluna ] = " ";
+    }
+
+    return linha - (linha1 - 1);
+
+} // final mover
+
+// mover para baixo
+int moverParaBaixo(string matriz[][20], int arraySize, int mover, int linha, int coluna )
+{
+    int linha2;
+    for(linha2 = 0; linha2 < mover; linha2++)
+    {
+        matriz[ linha + linha2 ][ coluna ] = " ";
+    } // final for linha 2
+
+    return linha + (linha2 - 1);
+
+} // final moverParaBaixo
+
+// mover para direita
+int moverParaDireita(string matriz[][20], int arraySize, int movimento, int linha, int coluna )
+{
+    int coluna3;
+    for(coluna3 = 0; coluna3 < movimento; coluna3++)
+    {
+        matriz[ linha ][ coluna + coluna3] = " ";
+    } // final for
+
+    return coluna + (coluna3 - 1);
+
+} // final mover para direita
+
+// mover para esquerda
+int moverParaEsquerda(string matriz[][20], int arraySize, int mover, int linha, int coluna )
+{
+    int coluna4;
+    for(coluna4 = 0; coluna4 < mover; coluna4++)
+    {
+        matriz[ linha ][ coluna - coluna4] = " ";
+    } // final for
+
+    return coluna - (coluna4 - 1);
+} // final mpver para esquerda
