@@ -157,7 +157,7 @@ void desenhar(string matriz[][20], int arraySize, int mover[], int sizeT, int li
 
     menu(); // chama função menu
 
-    cout << "\tDigite as suas opções: ";
+    cout << "\tDigite as suas opções: " << endl;
 
     // enquanto a opção for diferente de 9 faça
     while(opcao != 9)
@@ -170,10 +170,13 @@ void desenhar(string matriz[][20], int arraySize, int mover[], int sizeT, int li
         {
             mover[contar] = opcao;
         }
+
         mover[contar] = opcao;
 
         cout << "5,";
         cin >> movimento;
+        contar += 1;
+        mover[ contar ] = movimento;
 
         if(opcao == 1)
         {
@@ -195,6 +198,7 @@ void desenhar(string matriz[][20], int arraySize, int mover[], int sizeT, int li
         contar++;
     } // final while
 
+    exibirMovimento(mover, sizeT );
     exibir(matriz, arraySize );
 
 } // final desenhar
@@ -214,8 +218,14 @@ int moverParaCima(string matriz[][20], int arraySize, int mover, int linha, int 
     int linha1;
     for(linha1 = 0; linha1 < mover; linha1++)
     {
-        matriz[ linha - linha1 ][ coluna ] = " ";
-    }
+        if( (linha - linha1 ) < 0 )
+        {
+            matriz[ linha - linha1 ][ coluna ] = " ";
+            return 0;
+        }
+        else
+            matriz[ linha - linha1 ][ coluna ] = " ";
+    } // final for
 
     return linha - (linha1 - 1);
 
@@ -227,7 +237,13 @@ int moverParaBaixo(string matriz[][20], int arraySize, int mover, int linha, int
     int linha2;
     for(linha2 = 0; linha2 < mover; linha2++)
     {
-        matriz[ linha + linha2 ][ coluna ] = " ";
+        if( ( linha + linha2 ) > 19 )
+        {
+            matriz[ 19 ][ coluna ] = " ";
+            return 19;
+        }
+        else
+            matriz[ linha + linha2 ][ coluna ] = " ";
     } // final for linha 2
 
     return linha + (linha2 - 1);
@@ -235,12 +251,18 @@ int moverParaBaixo(string matriz[][20], int arraySize, int mover, int linha, int
 } // final moverParaBaixo
 
 // mover para direita
-int moverParaDireita(string matriz[][20], int arraySize, int movimento, int linha, int coluna )
+int moverParaDireita(string matriz[][20], int arraySize, int mover, int linha, int coluna )
 {
     int coluna3;
-    for(coluna3 = 0; coluna3 < movimento; coluna3++)
+    for(coluna3 = 0; coluna3 < mover; coluna3++)
     {
-        matriz[ linha ][ coluna + coluna3] = " ";
+        if ( (coluna + coluna3) > 19 )
+        {
+            matriz[ linha ][ 19 ] = " ";
+            return 19;
+        }
+        else
+            matriz[ linha ][ coluna + coluna3] = " ";
     } // final for
 
     return coluna + (coluna3 - 1);
@@ -253,7 +275,13 @@ int moverParaEsquerda(string matriz[][20], int arraySize, int mover, int linha, 
     int coluna4;
     for(coluna4 = 0; coluna4 < mover; coluna4++)
     {
-        matriz[ linha ][ coluna - coluna4] = " ";
+        if( (coluna + coluna4) < 0 )
+        {
+            matriz[ linha ][ 0 ] = " ";
+            return 0;
+        }
+        else
+            matriz[ linha ][ coluna - coluna4] = " ";
     } // final for
 
     return coluna - (coluna4 - 1);
