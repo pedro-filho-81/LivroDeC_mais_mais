@@ -13,6 +13,7 @@
 #include <clocale>
 #include <cstdlib>
 #include <iomanip>
+#include <conio.h>
 
 using namespace std;
 
@@ -20,7 +21,6 @@ int main()
 {
     // muda a configuração para português brasileiro
     setlocale(LC_ALL, "Portuguese");
-
 
     // 7.8 Escreva instruções C++ para realizar cada uma das seguintes tarefas:
     // a) Exiba o valor do elemento 6 do array de caracteres f.
